@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useAutoplayVideo } from "../hooks/useAutoplayVideo";
 
 const INTEREST_CARDS = [
   {
@@ -462,32 +463,8 @@ export default function OrderSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formStatus, setFormStatus] = useState("");
   const [interestError, setInterestError] = useState(false);
-  const orderFormVideoRef = useRef(null);
+  const orderFormVideoRef = useAutoplayVideo({ threshold: 0.12 });
   const orderFormAreaRef = useRef(null);
-
-  useEffect(() => {
-    const video = orderFormVideoRef.current;
-    const area = orderFormAreaRef.current;
-    if (!video || !area) return undefined;
-
-    const playVideo = () => {
-      video.play().catch(() => {});
-    };
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          playVideo();
-        } else {
-          video.pause();
-        }
-      },
-      { threshold: 0.12 }
-    );
-
-    observer.observe(area);
-    return () => observer.disconnect();
-  }, []);
 
   const hasPreviewContent =
     formValues.name.trim() ||
@@ -618,10 +595,13 @@ export default function OrderSection() {
             ref={orderFormVideoRef}
             className="order-form-area__video"
             src="/videos/order-form-bg.mp4"
+            autoPlay
             muted
+            defaultMuted
             loop
             playsInline
-            preload="metadata"
+            preload="auto"
+            disablePictureInPicture
           />
           <div className="order-form-area__overlay" />
         </div>

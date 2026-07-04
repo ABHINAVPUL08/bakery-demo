@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import OrderSection from "./components/OrderSection";
+import { useAutoplayVideo } from "./hooks/useAutoplayVideo";
 import "./App.css";
 
 const carouselSlides = [
@@ -99,7 +100,8 @@ function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
   const [carouselVisible, setCarouselVisible] = useState(false);
-  const heroVideoRef = useRef(null);
+  const heroVideoRef = useAutoplayVideo({ threshold: 0.1 });
+  const storyVideoRef = useAutoplayVideo({ threshold: 0.15 });
   const carouselRef = useRef(null);
 
   useEffect(() => {
@@ -123,47 +125,6 @@ function App() {
 
     observer.observe(carousel);
     return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    const video = heroVideoRef.current;
-    const hero = document.querySelector(".hero");
-    if (!video || !hero) return undefined;
-
-    const playHeroVideo = () => {
-      video.play().catch(() => {});
-    };
-
-    const pauseHeroVideo = () => {
-      video.pause();
-    };
-
-    const heroObserver = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !document.hidden) {
-          playHeroVideo();
-        } else {
-          pauseHeroVideo();
-        }
-      },
-      { threshold: 0.15 }
-    );
-
-    const onVisibilityChange = () => {
-      if (document.hidden) {
-        pauseHeroVideo();
-      } else if (hero.getBoundingClientRect().bottom > 0) {
-        playHeroVideo();
-      }
-    };
-
-    heroObserver.observe(hero);
-    document.addEventListener("visibilitychange", onVisibilityChange);
-
-    return () => {
-      heroObserver.disconnect();
-      document.removeEventListener("visibilitychange", onVisibilityChange);
-    };
   }, []);
 
   useEffect(() => {
@@ -265,9 +226,11 @@ function App() {
           className="hero-video"
           autoPlay
           muted
+          defaultMuted
           loop
           playsInline
-          preload="metadata"
+          preload="auto"
+          disablePictureInPicture
           aria-hidden="true"
           src="/videos/baker-flour.mp4"
         />
@@ -772,12 +735,15 @@ function App() {
           </div>
           <div className="story-media">
             <video
+              ref={storyVideoRef}
               className="story-video"
               autoPlay
               muted
+              defaultMuted
               loop
               playsInline
-              preload="metadata"
+              preload="auto"
+              disablePictureInPicture
               aria-label="Artisan baker scoring dough"
             >
               <source src="/videos/story-baking.mp4" type="video/mp4" />

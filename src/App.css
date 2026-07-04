@@ -214,6 +214,24 @@
   pointer-events: none;
 }
 
+.hero-video::-webkit-media-controls,
+.hero-video::-webkit-media-controls-enclosure,
+.hero-video::-webkit-media-controls-start-playback-button,
+.hero-video::-webkit-media-controls-overlay-play-button,
+.story-video::-webkit-media-controls,
+.story-video::-webkit-media-controls-enclosure,
+.story-video::-webkit-media-controls-start-playback-button,
+.story-video::-webkit-media-controls-overlay-play-button,
+.order-form-area__video::-webkit-media-controls,
+.order-form-area__video::-webkit-media-controls-enclosure,
+.order-form-area__video::-webkit-media-controls-start-playback-button,
+.order-form-area__video::-webkit-media-controls-overlay-play-button {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  -webkit-appearance: none;
+}
+
 .hero-content {
   position: relative;
   z-index: 1;
