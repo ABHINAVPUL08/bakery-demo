@@ -1,11 +1,13 @@
 .site {
   background: #1f1715;
   color: #fff8eb;
+  width: 100%;
+  overflow-x: clip;
 }
 
 .container {
-  width: min(1240px, 94%);
-  margin: 0 auto;
+  width: min(1240px, calc(100% - clamp(1.25rem, 4vw, 3rem)));
+  margin-inline: auto;
 }
 
 .row {
@@ -174,7 +176,9 @@
   background: transparent;
   border: 0;
   cursor: pointer;
-  padding: 0;
+  padding: 0.5rem;
+  min-width: 44px;
+  min-height: 44px;
   z-index: 4;
 }
 
@@ -424,10 +428,11 @@
 
 .cakes-desc h2 {
   font-family: "Gilroy", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 2.4rem;
+  font-size: clamp(1.75rem, 4.5vw, 2.4rem);
   font-weight: 800;
-  letter-spacing: 0.171rem;
+  letter-spacing: 0.12em;
   color: #2d211e;
+  line-height: 1.2;
 }
 
 .cakes-desc p {
@@ -949,9 +954,10 @@
 
 .catering-copy h2 {
   font-family: "Gilroy", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 4rem;
+  font-size: clamp(2.2rem, 5vw, 4rem);
   letter-spacing: 0.08rem;
   margin-bottom: 1rem;
+  line-height: 1.1;
 }
 
 .catering-copy p {
@@ -984,8 +990,9 @@
 .gift-boxes h2 {
   color: #2d211e;
   font-family: "Gilroy", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 4rem;
+  font-size: clamp(2.2rem, 5vw, 4rem);
   margin: 1rem 0;
+  line-height: 1.1;
 }
 
 .gift-boxes > p {
@@ -1151,7 +1158,8 @@
 .social-callout-box p {
   margin: 0;
   font-family: "Lora", Georgia, serif;
-  font-size: 2.2rem;
+  font-size: clamp(1.35rem, 3.5vw, 2.2rem);
+  line-height: 1.45;
 }
 
 .social-follow {
@@ -1161,7 +1169,7 @@
 .social-follow h3 {
   margin: 0 0 1rem;
   font-family: "Gilroy", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 2.8rem;
+  font-size: clamp(1.75rem, 4vw, 2.8rem);
   letter-spacing: 0.08rem;
 }
 
@@ -2295,9 +2303,93 @@
   }
 }
 
+@media (max-width: 1200px) {
+  .contact-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.5rem 2rem;
+  }
+
+  .cake-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .gift-box-media-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .order-shell {
+    width: min(1400px, calc(100% - clamp(1.25rem, 4vw, 3rem)));
+  }
+}
+
 @media (max-width: 1024px) {
   .cake-categories-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero-content {
+    grid-template-columns: 1fr;
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+    min-height: auto;
+    padding: clamp(3rem, 8vw, 5rem) 0 4rem;
+    gap: 1.5rem;
+  }
+
+  .hero h1 {
+    max-width: 12ch;
+    margin-inline: auto;
+  }
+
+  .line {
+    margin-inline: auto;
+  }
+
+  .hero-right {
+    justify-self: center;
+    max-width: min(390px, 100%);
+    margin-bottom: 0;
+  }
+
+  .hero-sunburst {
+    right: -120px;
+    bottom: -160px;
+    width: min(400px, 50vw);
+    opacity: 0.14;
+  }
+
+  .split-block,
+  .story {
+    grid-template-columns: 1fr;
+    padding: clamp(3rem, 6vw, 5rem) clamp(1rem, 4vw, 4%);
+  }
+
+  .gift-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .order-form-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .order-form-sidebar {
+    position: static;
+  }
+
+  .order-preview-card {
+    position: static;
+  }
+
+  .order-trust-grid--sidebar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .specialties-heading {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    padding: 1.1rem 2rem;
+    width: min(92%, 520px);
   }
 }
 
@@ -2331,29 +2423,41 @@
   }
 
   .about-grid {
-    grid-template-columns: 70% 1fr;
-    min-height: 420px;
+    grid-template-columns: 1fr;
+    min-height: auto;
+    gap: 0;
   }
 
   .about-copy {
-    padding: 5rem 0 4rem;
+    padding: 3.5rem 0 2rem;
   }
 
   .about-photo {
-    position: absolute;
-    top: 50%;
-    right: 0;
-    width: min(48%, 300px);
-    margin-top: 0;
-    transform: translateY(-50%);
+    position: relative;
+    top: auto;
+    right: auto;
+    width: min(100%, 360px);
+    margin: -1rem auto 0;
+    transform: none;
     padding: 0;
   }
 
   .about-photo img {
     max-width: 100%;
+    width: 100%;
     aspect-ratio: 4 / 5;
     max-height: none;
     box-shadow: 0 14px 32px rgba(45, 35, 32, 0.2);
+  }
+
+  .about-section {
+    margin-bottom: 0;
+    padding-bottom: 2rem;
+  }
+
+  .line-left,
+  .line-bottom {
+    display: none;
   }
 
   .catering-grid {
@@ -2392,11 +2496,11 @@
   }
 
   .hero {
-    min-height: 80vh;
+    min-height: clamp(520px, 85vh, 900px);
   }
 
   .hero-content {
-    min-height: 80vh;
+    min-height: auto;
     padding-bottom: 3rem;
     align-items: center;
   }
@@ -2408,12 +2512,19 @@
     opacity: 0.16;
   }
 
+  .hero-right {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
   .hero-right p {
-    font-size: 1.65rem;
+    font-size: clamp(1.2rem, 4.5vw, 1.65rem);
+    text-align: center;
   }
 
   .vert-line {
-    height: 90px;
+    height: 60px;
+    width: 3px;
   }
 
   .cake-grid {
@@ -2568,6 +2679,10 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .order-trust-grid--sidebar {
+    grid-template-columns: 1fr;
+  }
+
   .order-form-footer {
     flex-direction: column;
     align-items: stretch;
@@ -2584,12 +2699,12 @@
 
   .about-section {
     margin-top: 0;
-    margin-bottom: -12.5rem;
+    margin-bottom: 0;
     padding-top: 2rem;
   }
 
   .about-copy {
-    padding: 3.2rem 0 6rem;
+    padding: 2.5rem 0 1.5rem;
   }
 
   .about-copy-inner {
@@ -2597,23 +2712,13 @@
   }
 
   .about-copy p {
-    font-size: 1.7rem;
+    font-size: clamp(1.35rem, 4.5vw, 1.7rem);
+    line-height: 1.45;
   }
 
   .about-photo {
-    top: 50%;
-    width: min(46%, 280px);
-    transform: translateY(-48%);
-  }
-
-  .line-left {
-    left: 0;
-    height: 120px;
-  }
-
-  .line-bottom {
-    height: 62px;
-    bottom: -1.3rem;
+    width: min(100%, 320px);
+    margin-top: 0;
   }
 
   .specialty-row {
@@ -2694,5 +2799,182 @@
 
   .footer-brand img {
     width: 120px;
+  }
+}
+
+@media (max-width: 600px) {
+  .mainnav {
+    height: 64px;
+  }
+
+  .brand img {
+    width: 110px;
+  }
+
+  .hamburger span {
+    width: 21px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.5rem, 11vw, 3.5rem);
+    max-width: none;
+  }
+
+  .hero {
+    min-height: clamp(460px, 78vh, 720px);
+  }
+
+  .carousel {
+    height: clamp(280px, 42vh, 420px);
+  }
+
+  .slide {
+    padding: 1.25rem clamp(0.75rem, 3vw, 1.5rem);
+  }
+
+  .slide p {
+    font-size: clamp(0.95rem, 3.8vw, 1.15rem);
+    padding: 0.85rem 1rem;
+    max-width: 100%;
+  }
+
+  .carousel-nav {
+    width: 38px;
+    height: 38px;
+    font-size: 1.5rem;
+  }
+
+  .carousel-nav.prev {
+    left: 0.65rem;
+  }
+
+  .carousel-nav.next {
+    right: 0.65rem;
+  }
+
+  .cakes {
+    padding-top: 3.5rem;
+  }
+
+  .cakes-desc h2 {
+    letter-spacing: 0.08em;
+  }
+
+  .cakes-desc p,
+  .cakes-sizes {
+    font-size: clamp(1rem, 3.8vw, 1.2rem);
+  }
+
+  .cake-category-card {
+    padding: 20px;
+  }
+
+  .cake-category-card__title {
+    font-size: 1.4rem;
+  }
+
+  .cake-grid {
+    gap: 1rem;
+  }
+
+  .cake-caption {
+    font-size: 0.82rem;
+    padding: 0.75rem 0.5rem;
+  }
+
+  .gift-boxes {
+    padding-top: 4rem;
+  }
+
+  .gift-box-media-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .contact {
+    padding: 2.5rem 0;
+  }
+
+  .contact h6 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .order-shell {
+    padding: clamp(2.5rem, 6vw, 4rem) 0 clamp(2.5rem, 6vw, 4rem);
+  }
+
+  .order-header h2 {
+    font-size: clamp(2rem, 8vw, 2.5rem);
+  }
+
+  .order-intro {
+    font-size: clamp(1rem, 3.8vw, 1.15rem);
+  }
+
+  .order-premium-field__control {
+    min-height: 54px;
+    padding: 0 1rem;
+  }
+
+  .order-trust-grid,
+  .order-trust-grid--sidebar {
+    grid-template-columns: 1fr;
+  }
+
+  .order-interest-card {
+    min-height: 140px;
+  }
+
+  .order-reserve-btn {
+    min-height: 52px;
+  }
+
+  .social-callout-box {
+    padding: 2.5rem 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .social-links-row {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .catering-copy h2,
+  .gift-boxes h2 {
+    font-size: clamp(1.85rem, 8vw, 2.4rem);
+  }
+
+  .story-text {
+    padding: 3rem 1rem 4rem;
+  }
+
+  .story-text p,
+  .story-text .story-lead {
+    font-size: clamp(1.1rem, 4vw, 1.6rem);
+  }
+}
+
+@media (max-width: 380px) {
+  .container {
+    width: calc(100% - 1.5rem);
+  }
+
+  .top-actions {
+    gap: 0.5rem;
+    font-size: 0.78rem;
+  }
+
+  .top-actions a:last-child {
+    padding: 0.45rem 0.65rem;
+  }
+
+  .overlay-links a {
+    font-size: 0.92rem;
   }
 }

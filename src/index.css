@@ -9,15 +9,37 @@ body,
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
   font-family: "Gilroy", "Helvetica Neue", Helvetica, Arial, sans-serif;
   background: #1f1715;
+  overflow-x: clip;
+}
+
+#root {
+  overflow-x: clip;
 }
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+}
+
+img,
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+video {
+  max-width: 100%;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
 }
